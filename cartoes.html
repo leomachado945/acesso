@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script
+      src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+      data-utmify-prevent-xcod-sck
+      data-utmify-prevent-subids
+      async
+      defer
+    ></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartões - Mercado Livre Bank</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Sora', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #333;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            padding: 16px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #3483fa;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #f5f5f5;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .support-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .support-buttons button {
+            background: none;
+            border: none;
+            padding: 8px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .support-buttons button:hover {
+            background: #f5f5f5;
+        }
+
+        .support-buttons i {
+            color: #666;
+            font-size: 18px;
+        }
+
+        .user-profile {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #e6f0ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3483fa;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Cards Section */
+        .cards-section {
+            margin-top: 20px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 16px;
+        }
+
+        /* Credit Card */
+        .credit-card {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border-radius: 16px;
+            padding: 24px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .credit-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .credit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+        }
+
+        .credit-card:hover::before {
+            animation: shine 0.5s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .card-chip {
+            width: 40px;
+            height: 32px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .card-chip::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 18px;
+            background: linear-gradient(135deg, #e6c200, #d4af37);
+            border-radius: 3px;
+        }
+
+        .card-brand {
+            text-align: right;
+        }
+
+        .card-brand-name {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .card-type {
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .card-number {
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .card-holder {
+            flex: 1;
+        }
+
+        .card-holder-label {
+            font-size: 8px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-holder-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .card-expiry {
+            text-align: right;
+        }
+
+        .card-expiry-label {
+            font-size: 8px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-expiry-date {
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Card Info */
+        .card-info {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-label i {
+            color: #3483fa;
+            width: 16px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .info-toggle {
+            cursor: pointer;
+            color: #999;
+            transition: color 0.2s;
+            padding: 4px;
+        }
+
+        .info-toggle:hover {
+            color: #666;
+        }
+
+        /* Card Actions */
+        .card-actions {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .action-btn:hover {
+            border-color: #3483fa;
+            background: #f8f9ff;
+            transform: translateY(-2px);
+        }
+
+        .action-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .action-text {
+            flex: 1;
+        }
+
+        .action-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 2px;
+        }
+
+        .action-subtitle {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Action Colors */
+        .action-limit { background: #e3f2fd; color: #1976d2; }
+        .action-invoice { background: #e8f5e8; color: #388e3c; }
+        .action-block { background: #ffebee; color: #d32f2f; }
+        .action-virtual { background: #f3e5f5; color: #7b1fa2; }
+
+        /* Bottom Menu */
+        .bottom-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 10px;
+            color: #777;
+            cursor: pointer;
+            transition: color 0.2s;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .menu-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .menu-item.active,
+        .menu-item:hover {
+            color: #3483fa;
+        }
+
+        /* Popup */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 16px;
+        }
+
+        .popup {
+            background: #fff;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: #3483fa;
+            color: #fff;
+        }
+
+        .popup-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .close-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .popup-content {
+            padding: 20px;
+        }
+
+        .popup-content p {
+            margin-bottom: 16px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .popup-content strong {
+            color: #222;
+        }
+
+        .pay-button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: #3483fa;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.2s;
+        }
+
+        .pay-button:hover {
+            background: #2968c8;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
+            }
+            
+            .card-number {
+                font-size: 16px;
+                letter-spacing: 3px;
+            }
+            
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="back-btn" onclick="window.location.href='index.html'">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h1 class="page-title">Cartões</h1>
+                </div>
+                <div class="header-right">
+                    <div class="support-buttons">
+                        <button onclick="openPopup()"><i class="fas fa-headset"></i></button>
+                        <button onclick="openPopup()"><i class="fas fa-question-circle"></i></button>
+                        <button onclick="openPopup()"><i class="fas fa-bell"></i></button>
+                    </div>
+                    <div class="user-profile">BR</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Credit Card -->
+        <div class="cards-section">
+            <h2 class="section-title">Cartão de Crédito</h2>
+            
+            <div class="credit-card" onclick="openPopup()">
+                <div class="card-header">
+                    <div class="card-chip"></div>
+                    <div class="card-brand">
+                        <div class="card-brand-name">Mercado Livre Bank</div>
+                        <div class="card-type">Mastercard</div>
+                    </div>
+                </div>
+                <div class="card-number">**** **** **** 1234</div>
+                <div class="card-footer">
+                    <div class="card-holder">
+                        <div class="card-holder-label">Nome do Portador</div>
+                        <div class="card-holder-name">*****</div>
+                    </div>
+                    <div class="card-expiry">
+                        <div class="card-expiry-label">Válido até</div>
+                        <div class="card-expiry-date">12/28</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Info -->
+        <div class="card-info">
+            <div class="info-row">
+                <div class="info-label">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Limite disponível</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="info-value" id="limitValue">R$ 4.700,00</span>
+                    <i class="fas fa-eye-slash info-toggle" onclick="toggleLimit(event)"></i>
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Fatura atual</span>
+                </div>
+                <span class="info-value">R$ 0,00</span>
+            </div>
+            <div class="info-row">
+                <div class="info-label">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Vencimento</span>
+                </div>
+                <span class="info-value">Todo dia 15</span>
+            </div>
+            <div class="info-row">
+                <div class="info-label">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Status</span>
+                </div>
+                <span class="info-value" style="color: #f57c00;">Pendente Ativação</span>
+            </div>
+        </div>
+
+        <!-- Card Actions -->
+        <div class="card-actions">
+            <h3 class="section-title">Ações do Cartão</h3>
+            <div class="actions-grid">
+                <div class="action-btn" onclick="openPopup()">
+                    <div class="action-icon action-limit">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="action-text">
+                        <div class="action-title">Aumentar Limite</div>
+                        <div class="action-subtitle">Solicitar aumento</div>
+                    </div>
+                </div>
+                <div class="action-btn" onclick="openPopup()">
+                    <div class="action-icon action-invoice">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <div class="action-text">
+                        <div class="action-title">Ver Fatura</div>
+                        <div class="action-subtitle">Histórico e detalhes</div>
+                    </div>
+                </div>
+                <div class="action-btn" onclick="openPopup()">
+                    <div class="action-icon action-block">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="action-text">
+                        <div class="action-title">Bloquear Cartão</div>
+                        <div class="action-subtitle">Temporário ou definitivo</div>
+                    </div>
+                </div>
+                <div class="action-btn" onclick="openPopup()">
+                    <div class="action-icon action-virtual">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="action-text">
+                        <div class="action-title">Cartão Virtual</div>
+                        <div class="action-subtitle">Para compras online</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Menu -->
+    <div class="bottom-menu">
+        <a href="index.html" class="menu-item">
+            <i class="fas fa-home"></i>
+            <span>Início</span>
+        </a>
+        <div class="menu-item active">
+            <i class="fas fa-credit-card"></i>
+            <span>Cartões</span>
+        </div>
+        <div class="menu-item" onclick="openPopup()">
+            <i class="fas fa-qrcode"></i>
+            <span>Pagar</span>
+        </div>
+        <div class="menu-item" onclick="openPopup()">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>Mais</span>
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div id="overlay" class="overlay" onclick="closePopup(event)">
+        <div class="popup" onclick="event.stopPropagation()">
+            <div class="popup-header">
+                <h3 class="popup-title">Leia com Atenção</h3>
+                <button class="close-btn" onclick="closePopup(event)">×</button>
+            </div>
+            <div class="popup-content">
+                <p><strong>Parabéns, o seu cartão está em produção, hora de ativar sua conta!</strong></p>
+                <p>Para ativar sua conta e usar seu cartão virtual, é necessário um depósito mínimo de <strong>R$ 20.</strong></p>
+                <p>Este valor não é para nós, ele ficará na sua conta e você poderá usá-lo como quiser. <strong>Sem esse depósito, não conseguiremos enviar o cartão físico, nem ativar seu cartão virtual!</strong></p>
+                <button class="pay-button" onclick="redirectToPayment()">Pagar Agora</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Estado da visibilidade do limite
+        let limitVisible = true;
+
+        // Função para abrir popup
+        function openPopup() {
+            document.getElementById('overlay').style.display = 'flex';
+        }
+
+        // Função para fechar popup
+        function closePopup(e) {
+            if (e) {
+                e.stopPropagation();
+            }
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Função para redirecionar ao pagamento
+        function redirectToPayment() {
+            window.location.href = 'https://checkout.resolvaagora.chat/VCCL1O8SC0T2';
+        }
+
+        // Toggle de visibilidade do limite
+        function toggleLimit(e) {
+            e.stopPropagation();
+            const limitValue = document.getElementById('limitValue');
+            const toggleIcon = e.target;
+            
+            if (limitVisible) {
+                limitValue.textContent = 'R$ ••••••';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            } else {
+                limitValue.textContent = 'R$ 4.700,00';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            }
+            limitVisible = !limitVisible;
+        }
+
+        // Abre popup ao clicar no fundo da página
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                // Não abre popup se clicar em elementos específicos
+                if (
+                    e.target.closest('.popup') ||
+                    e.target.closest('header') ||
+                    e.target.closest('.bottom-menu') ||
+                    e.target.closest('.info-toggle') ||
+                    e.target.classList.contains('info-toggle')
+                ) {
+                    return;
+                }
+                
+                // Verifica se clicou em área vazia
+                if (e.target === document.body || e.target.classList.contains('container')) {
+                    openPopup();
+                }
+            });
+        });
+
+        // Fecha popup com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopup();
+            }
+        });
+    </script>
+</body>
+</html>
