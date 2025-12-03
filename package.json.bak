@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "echo 'Build completed - using static HTML'",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "echo 'Preview - open index.html directly'"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
